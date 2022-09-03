@@ -2,10 +2,15 @@ import Image from "next/image";
 import { HomeIcon, ChevronDownIcon } from '@heroicons/react/24/solid'
 import { SparklesIcon, GlobeAltIcon, VideoCameraIcon, BellIcon, PlusIcon } from '@heroicons/react/24/outline';
 import { MessageIcon, SpeakerIcon, MenuIcon } from './Icons';
+import { signIn, signOut, useSession } from "next-auth/react";
 
 
 
 const Header = ()  => {
+
+    const { data : session } = useSession();
+
+    console.log(session?.user);
 
     return(
         <div className="sticky top-0 z-50 flex bg-white px-4 py-2">
@@ -16,6 +21,7 @@ const Header = ()  => {
                     objectFit="contain"
                     src="/reddit_logo.svg"
                     layout="fill"
+                    priority={true}
                 />
             </div>
             
@@ -30,7 +36,7 @@ const Header = ()  => {
             <form className="flex flex-1 items-center space-x-2 rounded-sm border border-gray-200 bg-gray-100 px-3 py-1"> 
 
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="text-gray-400 w-8 h-8">
-                    <path fill-rule="evenodd" d="M10.5 3.75a6.75 6.75 0 100 13.5 6.75 6.75 0 000-13.5zM2.25 10.5a8.25 8.25 0 1114.59 5.28l4.69 4.69a.75.75 0 11-1.06 1.06l-4.69-4.69A8.25 8.25 0 012.25 10.5z" clip-rule="evenodd" />
+                    <path fillRule="evenodd" d="M10.5 3.75a6.75 6.75 0 100 13.5 6.75 6.75 0 000-13.5zM2.25 10.5a8.25 8.25 0 1114.59 5.28l4.69 4.69a.75.75 0 11-1.06 1.06l-4.69-4.69A8.25 8.25 0 012.25 10.5z" clipRule="evenodd" />
                 </svg>
 
                 <input className="flex-1 bg-transparent outline-none" type="text" placeholder="Search Reddit"/>
@@ -57,17 +63,44 @@ const Header = ()  => {
             
 
             {/** Sign In/out Button */}
-            <div className="hidden lg:flex items-center space-x-2 border-gray-100 p-2 hover:cursor-pointer">
-                <div className="relative h-5 w-5 flex-shrink-0">
-                    <Image 
-                        src="/reddit-head.png" 
-                        alt="reddit head"
-                        layout="fill"
-                        objectFit="contain"
-                    />
-                </div>
-                <p className="text-gray-400">Sign In</p>
-            </div>
+            {
+                !session ? (
+
+                    <div 
+                        className="hidden lg:flex items-center space-x-2 border-gray-100 p-2 hover:cursor-pointer"
+                        onClick={() => signIn() }
+                    >
+                        <div className="relative h-5 w-5 flex-shrink-0">
+                            <Image 
+                                src="/reddit-head.png" 
+                                alt="reddit head"
+                                layout="fill"
+                                objectFit="contain"
+                            />
+                        </div>
+                        <p className="text-gray-400">Sign In</p>
+                    </div>
+                ) : (
+                    <div 
+                        className="hidden lg:flex items-center space-x-2 border-gray-100 p-2 hover:cursor-pointer border rounded-md hover:bg-gray-100"
+                        onClick={() => signOut() }
+                    >
+                        <div className="relative h-5 w-5 flex-shrink-0">
+                            <Image 
+                                src={session?.user?.image || "/reddit-head.png"}
+                                alt="reddit head"
+                                layout="fill"
+                                objectFit="contain"
+                            />
+                        </div>
+                        <div className="flex-1 text-xs">
+                            <p className="truncate">{session?.user?.name}</p>
+                            <p className="text-gray-400">1 Karma</p>
+                        </div>
+                        <ChevronDownIcon className="h-5 flex-shrink-0 text-gray-400"/>
+                    </div>
+                )
+            }
 
 
         </div>
