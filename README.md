@@ -11,4 +11,5 @@
 - Tailwind
 - Hero Icons
 - React Hook Form
-- Dicebear Avatars
+- Dicebear Avatars (Avatar Generator)
+- React Hot Toast (Notifications)
