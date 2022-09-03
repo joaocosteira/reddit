@@ -10,8 +10,6 @@ const Header = ()  => {
 
     const { data : session } = useSession();
 
-    console.log(session?.user);
-
     return(
         <div className="sticky top-0 z-50 flex bg-white px-4 py-2">
 
