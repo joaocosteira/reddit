@@ -12,8 +12,8 @@ export default function App({ Component, pageProps: { session, ...pageProps } } 
       <SessionProvider session={session}>
         <div className='h-screen overflow-y-scroll bg-slate-200'>
           <Header/>
+          <Component {...pageProps} />
         </div>
-        <Component {...pageProps} />
       </SessionProvider>
     </ApolloProvider>
   )
