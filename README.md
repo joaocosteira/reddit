@@ -21,7 +21,7 @@ In this repository you can find my version, which contains a few differences: be
 - Apollo Client
 - Supabase
 - Tailwind
-- Hero Icons
+- Heroicons
 - React Hook Form
 - Dicebear Avatars (Avatar Generator)
 - React Hot Toast (Notifications)
