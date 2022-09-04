@@ -49,3 +49,17 @@ export const ADD_SUBREDDIT = gql`
         }
     }
 `
+
+export const ADD_VOTE = gql`
+    mutation ADDVOTE($post_id: ID!, $username: String!, $upvote: Boolean!){
+        insertVote(post_id: $post_id, username: $username, upvote: $upvote){
+            id
+            created_at
+            post_id
+            upvote
+            username
+        }
+    }    
+
+
+`

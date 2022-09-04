@@ -1,5 +1,18 @@
 import { gql } from "@apollo/client";
 
+
+export const ADD_ALL_VOTES_BY_POST_ID = gql`
+    query ADDALLVOTESBYPOSTID($post_id: ID!) {
+        getVotesByPostId(post_id: $post_id){
+            created_at
+            id
+            post_id
+            upvote
+            username
+        }
+    }
+`
+
 export const GET_ALL_POSTS = gql`
     query GETALLPOSTS {
         getPostList{
