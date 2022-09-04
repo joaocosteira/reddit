@@ -1,5 +1,6 @@
 import { useMutation, useQuery } from "@apollo/client";
 import { useSession } from "next-auth/react";
+import Head from "next/head";
 import { useRouter } from "next/router";
 import { SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
@@ -51,36 +52,43 @@ const PostPage = () => {
 
     
     return(
-        <div className="mx-auto my-7 max-w-5xl">
-            <Post post={post} />
+        <>
+            <Head>
+                <title>{`r/${post?.subreddit[0]?.topic}: ${post?.title}`}</title>
+            </Head>
 
-            <div className="-mt-1 rounded-b-md border border-t-0 border-gray-300 bg-white p-5 pl-16">
-                <p>
-                    Comment as <span className="text-red-500">{session?.user?.name}</span>
-                </p>
+            <div className="mx-auto my-7 max-w-5xl">
+                <Post post={post} />
 
-                <form onSubmit={handleSubmit(onSubmit)} className="flex space-y-2 flex-col">
-                    <textarea 
-                        {...register('comment')}
-                        disabled={!session}
-                        className="h-24 rounded-md border border-gray-200 p-2  pl-4 outline-none disabled:bg-gray-50"
-                        placeholder= { session ? "What are your thought?" : "SignIn to enter the conversation"}
-                    />
+                <div className="-mt-1 rounded-b-md border border-t-0 border-gray-300 bg-white p-5 pl-16">
+                    <p>
+                        Comment as <span className="text-red-500">{session?.user?.name}</span>
+                    </p>
 
-                    <button 
-                        type="submit"
-                        className="rounded-full bg-red-500 p-3 text-white disabled:bg-gray-200"
-                    >
-                        Comment
-                    </button>
-                </form>
+                    <form onSubmit={handleSubmit(onSubmit)} className="flex space-y-2 flex-col">
+                        <textarea 
+                            {...register('comment')}
+                            disabled={!session}
+                            className="h-24 rounded-md border border-gray-200 p-2  pl-4 outline-none disabled:bg-gray-50"
+                            placeholder= { session ? "What are your thought?" : "SignIn to enter the conversation"}
+                        />
+
+                        <button 
+                            disabled={!session}
+                            type="submit"
+                            className="rounded-full bg-red-500 p-3 text-white disabled:bg-gray-200"
+                        >
+                            Comment
+                        </button>
+                    </form>
+                </div>
+
+                <div className="-my-5 rounded-b-md border border-t-0 border-gray-300 bg-white py-5 px-10">
+                    <hr className="py-2" />
+                    { post?.comments.map( (comment: Comments) => <Comment key={comment.id} comment={comment}/>) }
+                </div>
             </div>
-
-            <div className="-my-5 rounded-b-md border border-t-0 border-gray-300 bg-white py-5 px-10">
-                <hr className="py-2" />
-                { post?.comments.map( (comment: Comments) => <Comment key={comment.id} comment={comment}/>) }
-            </div>
-        </div>
+        </>
     )
 }
 

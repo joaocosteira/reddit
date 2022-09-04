@@ -127,17 +127,17 @@ const Post = ({ post } : { post : Post}) => {
 
                         <div className='postButton'>
                             <GiftIcon className='h-6 w-6'/>
-                            <p className='hidden sm:inline'>{post?.comments?.length} Award</p>
+                            <p className='hidden sm:inline'>{0} Award</p>
                         </div>
 
                         <div className='postButton'>
                             <ShareIcon className='h-6 w-6'/>
-                            <p className='hidden sm:inline'>{post?.comments?.length} Share</p>
+                            <p className='hidden sm:inline'>{0} Share</p>
                         </div>
 
                         <div className='postButton'>
                             <BookmarkIcon className='h-6 w-6'/>
-                            <p className='hidden sm:inline'>{post?.comments?.length} Save</p>
+                            <p className='hidden sm:inline'>{0} Save</p>
                         </div>
 
                         <div className='postButton'>
