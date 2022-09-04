@@ -3,6 +3,7 @@ import { HomeIcon, ChevronDownIcon } from '@heroicons/react/24/solid'
 import { SparklesIcon, GlobeAltIcon, VideoCameraIcon, BellIcon, PlusIcon } from '@heroicons/react/24/outline';
 import { MessageIcon, SpeakerIcon, MenuIcon } from './Icons';
 import { signIn, signOut, useSession } from "next-auth/react";
+import Link from "next/link";
 
 
 
@@ -15,12 +16,16 @@ const Header = ()  => {
 
             {/** Left Side Logo */}
             <div className="relative h-10 w-20 flex-shrink-0 cursor-pointer">
-                <Image
-                    objectFit="contain"
-                    src="/reddit_logo.svg"
-                    layout="fill"
-                    priority={true}
-                />
+                <Link href='/'>
+                    <div>
+                        <Image
+                            objectFit="contain"
+                            src="/reddit_logo.svg"
+                            layout="fill"
+                            priority={true}
+                        />
+                    </div>
+                </Link>
             </div>
             
             {/** Home Drop Down */}

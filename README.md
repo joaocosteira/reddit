@@ -14,3 +14,4 @@
 - Dicebear Avatars (Avatar Generator)
 - React Hot Toast (Notifications)
 - React Time Ago
+- UI Ball Loaders

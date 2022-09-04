@@ -10,6 +10,7 @@
     "@dicebear/avatars": "^4.10.3",
     "@dicebear/avatars-identicon-sprites": "^4.10.3",
     "@heroicons/react": "^2.0.10",
+    "@uiball/loaders": "^1.2.6",
     "graphql": "^16.6.0",
     "next": "latest",
     "next-auth": "^4.10.3",
