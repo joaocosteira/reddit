@@ -1,5 +1,17 @@
 import { gql } from "@apollo/client";
 
+
+export const ADD_COMMENT = gql`
+    mutation ADDCOMMENT($post_id: ID!, $username: String!, $text: String!){
+        insertComment(post_id: $post_id, username: $username, text: $text){
+            created_at
+            id
+            text
+            username
+        }
+    }
+`
+
 export const ADD_POST = gql`
     mutation ADDPOST(
         $body: String!
