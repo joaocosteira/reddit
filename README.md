@@ -11,6 +11,7 @@ In this repository you can find my version, which contains a few differences: be
 - Up/Down Vote
 - Feed
 - Subreddit and Post Page
+- Fully Responsive for different screen-sizes
 
 ## Tecnologies Used:
 - TypeScript
