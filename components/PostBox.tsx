@@ -1,20 +1,22 @@
 import { useSession } from "next-auth/react";
 import Avatar from "./Avatar";
 import { LinkIcon } from "@heroicons/react/24/outline";
-import { PhotographIcon } from "./Icons";
+import { CloseIcon, PhotographIcon } from "./Icons";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { ADD_POST, ADD_SUBREDDIT } from "../graphql/mutations";
 import client from "../apollo-client";
-import { GET_SUBREDDIT_BY_TOPIC } from "../graphql/queries";
+import { GET_ALL_POSTS, GET_SUBREDDIT_BY_TOPIC } from "../graphql/queries";
 import toast from "react-hot-toast";
 
 const PostBox = ()  => {
 
     const { data : session } = useSession();
     const [imageBoxOpen,setImageBoxOpen] = useState<boolean>(false);
-    const [addPost] = useMutation(ADD_POST);
+    const [addPost] = useMutation(ADD_POST,{
+        refetchQueries: [GET_ALL_POSTS, 'getPostList']
+    });
     const [addSubreddit] = useMutation(ADD_SUBREDDIT);
 
     const { register,
@@ -67,6 +69,7 @@ const PostBox = ()  => {
             setValue('postBody','');
             setValue('subreddit','');
             setValue('postImage','');
+            setImageBoxOpen(false);
             
             toast.success('New Post Created',{ id : notification });
 
@@ -75,6 +78,14 @@ const PostBox = ()  => {
             console.log(error);
         }
     })
+
+    const resetInputs = () => {
+        setValue('postTitle','');
+        setValue('postBody','');
+        setValue('subreddit','');
+        setValue('postImage','');     
+        setImageBoxOpen(false);   
+    }
 
 
     return(
@@ -101,6 +112,15 @@ const PostBox = ()  => {
                     className={`h-6 text-gray-300 cursor-pointer ${imageBoxOpen && "text-red-500"}`} 
                 />   
                 <LinkIcon className="h-6 text-gray-300 cursor-pointer" />
+
+                {
+                   !!watch('postTitle') && (
+                        <CloseIcon 
+                            onClick={resetInputs}
+                            className={`h-6 text-gray-300 cursor-pointer hover:text-red-500`} 
+                        />                     
+                   ) 
+                }
 
             </div>
             {

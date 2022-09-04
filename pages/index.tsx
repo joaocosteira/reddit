@@ -1,5 +1,6 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
+import Feed from '../components/Feed'
 import PostBox from '../components/PostBox'
 
 
@@ -14,7 +15,7 @@ const Home: NextPage = () => {
       <PostBox />
 
       <div className='flex'>
-        {/** Feed */}
+        <Feed/>
       </div>
       
     </div>
