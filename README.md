@@ -6,7 +6,7 @@ In this repository you can find my version, which contains a few differences: be
 
 ## Functionalities
 - Authentication via a real reddit account
-- Create Post and a SubReddit
+- Create Post and Subreddits
 - Comment
 - Up/Down Vote
 - Feed
